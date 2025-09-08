@@ -1,0 +1,51 @@
+function nemeh(){
+    const a = document.getElementById("num1").value;
+    const b = document.getElementById("num2").value;
+    const num1= Number(a);
+    const num2= Number(b);
+    console.log(num1+num2);
+    return num1+num2;
+}
+function displayResult1(){
+    const val = nemeh();
+    document.getElementById("num1").value = val;
+    document.getElementById("num2").value = "";
+}
+function hasah(){
+    const a = document.getElementById("num1").value;
+    const b = document.getElementById("num2").value;
+    const num1= Number(a);
+    const num2= Number(b);
+    console.log(num1-num2);
+    return num1-num2;
+}
+function displayResult2(){
+    const val = hasah();
+    document.getElementById("num1").value = val;
+    document.getElementById("num2").value = "";
+}
+function urjih(){
+    const a = document.getElementById("num1").value;
+    const b = document.getElementById("num2").value;
+    const num1= Number(a);
+    const num2= Number(b);
+    console.log(num1*num2);
+    return num1*num2;
+}
+function displayResult3(){
+    const val = urjih();
+    document.getElementById("num1").value = val;
+    document.getElementById("num2").value = "";
+}
+function huvaah(){
+    const a = document.getElementById("num1").value;
+    const b = document.getElementById("num2").value;
+    const num1= Number(a);
+    const num2= Number(b);
+    console.log(num1/num2);
+    return num1/num2;
+}
+function displayResult4(){
+    const val = huvaah();
+    document.getElementById("num1").innerText = val;
+}
