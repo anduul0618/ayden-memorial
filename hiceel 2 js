@@ -1,0 +1,31 @@
+
+function Submit() {
+    let name = document.getElementById("name").value;
+    let comment = document.getElementById("comment").value;
+
+    if (name && comment) {
+        let currentDate = new Date();
+        let dateTime = currentDate.toLocaleString();
+        let newName = document.createElement('p');
+        newName.textContent = "Name: " + name;
+        newName.classList.add("font-semibold", "text-gray-700", "mt-2");
+        let newComment = document.createElement('p');
+        newComment.textContent = "Comment: " + comment;
+        newComment.classList.add("text-gray-600", "mt-2", "bg-gray-100", "p-4", "rounded-md", "shadow-md");
+        let newDateTime = document.createElement('p');
+        newDateTime.textContent = dateTime;
+        newDateTime.classList.add("absolute", "top-2", "right-4", "text-sm", "text-gray-500", "italic");
+        let container = document.getElementById("commentContainer");
+        let commentBox = document.createElement('div');
+        commentBox.classList.add("relative", "border", "border-gray-300", "rounded-lg", "p-4", "my-4", "bg-white", "shadow-lg");
+        commentBox.appendChild(newDateTime);
+        commentBox.appendChild(newName);
+        commentBox.appendChild(newComment);
+        container.appendChild(commentBox);
+
+        document.getElementById("name").value = "";
+        document.getElementById("comment").value = "";
+    } else {
+        alert('Please enter both name and comment.');
+    }
+}
