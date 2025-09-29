@@ -1,0 +1,43 @@
+function togglePasswordVisibility() {
+    const input = document.getElementById('passwordInput');
+    const icon = document.getElementById('passwordIcon');
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+    } else {
+        input.type = 'password';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const VALID_EMAIL = '123@gmail.com';
+    const VALID_PASSWORD = '123';
+
+    const form = document.querySelector('form');
+    const emailInput = form.querySelector('input[type="email"]');
+    const passwordInput = document.getElementById('passwordInput');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!email || !password) {
+            alert('Please fill in both email and password.');
+            return;
+        }
+
+        if (email === VALID_EMAIL && password === VALID_PASSWORD) {
+            window.location.href = 'homepage.html';
+        } else {
+            alert('Wrong password or username.');
+        }
+    });
+
+    const toggleButton = document.getElementById('togglePassword');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', togglePasswordVisibility);
+    }
+});
