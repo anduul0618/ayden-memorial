@@ -1,0 +1,117 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
+export default function ProductsPage() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/products')
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.error('Fetch error:', err));
+  }, []);
+
+  return (
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white border-r p-6 flex flex-col gap-6">
+        <div>
+          <h2 className="text-sm font-bold text-gray-600 mb-2">Products</h2>
+          <ul className="space-y-1 text-gray-700">
+            <li className="cursor-pointer hover:text-black">Clothes</li>
+            <li className="cursor-pointer hover:text-black">Accessories</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-sm font-bold text-gray-600 mb-2">Payments</h2>
+          <ul className="space-y-1 text-gray-700">
+            <li>Transactions</li>
+            <li>Customers</li>
+            <li>Payouts</li>
+            <li>Balances</li>
+            <li>Subscriptions</li>
+            <li>Payment plans</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-sm font-bold text-gray-600 mb-2">Commerce</h2>
+          <ul className="space-y-1 text-gray-700">
+            <li>Referrals</li>
+            <li>Audit logs</li>
+            <li>Settings</li>
+          </ul>
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <main className="flex-1 flex flex-col">
+        {/* Top bar */}
+        <header className="bg-white border-b p-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <input
+              type="text"
+              placeholder="Search"
+              className="border rounded px-3 py-1 text-sm"
+            />
+            <span className="flex items-center gap-2 text-sm">
+              <span className="w-2 h-2 rounded-full bg-green-500"></span>
+              Live
+            </span>
+            <select className="border rounded px-2 py-1 text-sm">
+              <option>English</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <select className="border rounded px-2 py-1 text-sm">
+              <option>Lists</option>
+            </select>
+            <button className="w-8 h-8 rounded-full bg-gray-300"></button>
+          </div>
+        </header>
+
+        {/* Product list */}
+        <section className="p-6 overflow-y-auto">
+          <div className="bg-white rounded-xl shadow p-6">
+            <h1 className="text-2xl font-bold mb-4">Products list</h1>
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="text-left border-b">
+                  <th className="p-3">Name</th>
+                  <th className="p-3">Category</th>
+                  <th className="p-3">Price</th>
+                  <th className="p-3">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((p) => (
+                  <tr key={p.id} className="border-b">
+                    <td className="p-3 flex items-center gap-3">
+                      <span
+                        className="inline-block w-5 h-5 rounded-md"
+                        style={{ backgroundColor: p.color }}
+                      />
+                      {p.name}
+                    </td>
+                    <td className="p-3">{p.category}</td>
+                    <td className="p-3">${Number(p.price).toFixed(2)}</td>
+                    <td
+                      className={`p-3 font-semibold ${
+                        p.status === 'Active' ? 'text-green-600' : 'text-red-600'
+                      }`}
+                    >
+                      {p.status}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
